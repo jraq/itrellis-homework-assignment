@@ -9,12 +9,21 @@ class ParentTodoModel extends TodoModel {
         this.task = todo.task;
         this.details = todo.details
         this.deadlineDate = todo.deadlineDate;
-        this.completed = todo.completed;
-        this.children = todo.children;
+        this.complete = todo.complete;
+        this.children = todo.children === undefined ? [] : todo.children;
     }
    children =  []
    get isComplete() {
-       //Check the marked completed and if all children are marked
+
+        let childrenComplete = true;
+
+        this.children.forEach(child => {
+            if(!child.isComplete) {
+                childrenComplete = false;
+            }
+        });
+
+       return this.complete || childrenComplete;
    }
 }
 
