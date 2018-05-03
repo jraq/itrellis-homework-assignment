@@ -15,11 +15,11 @@ class ParentTodoModel extends TodoModel {
    children =  []
    get isComplete() {
 
-        let childrenComplete = true;
+        let childrenComplete = false;
 
         this.children.forEach(child => {
-            if(!child.isComplete) {
-                childrenComplete = false;
+            if(child.isComplete) {
+                childrenComplete = true;
             }
         });
 

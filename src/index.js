@@ -4,7 +4,14 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import TodoStore from './store/TodoStore';
-import { Provider  } from 'mobx-react';
+import { Provider } from 'mobx-react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 
-ReactDOM.render(<Provider todoStore={new TodoStore()}><App /></Provider>, document.getElementById('root'));
+
+ReactDOM.render(<BrowserRouter>
+    <Provider todoStore={new TodoStore()}>
+        <App />
+    </Provider>
+</BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();

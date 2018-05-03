@@ -12,7 +12,7 @@ class TodoModel {
     deadlineDate = moment().add(1, "days")
     complete = false;
     get isOverDue() {
-        return moment(this.deadlineDate).isSameOrAfter(moment())
+        return moment(this.deadlineDate).isBefore(moment())
     }
 }
 
