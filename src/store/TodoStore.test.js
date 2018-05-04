@@ -46,15 +46,12 @@ it('MarkComplete', () => {
 
     todoStore.addTodo(parentTodo);
     todoStore.addTodo(childTodo, parentTodo.id);
-
-    todoStore.markComplete(parentTodo.id);
     todoStore.markComplete(childTodo.id, parentTodo.id);
-
     let adddedParentTodo = todoStore.getTodo(parentTodo.id);
     let addedChildTodo = adddedParentTodo.children.find(x => x.id == childTodo.id);
-
-    expect(adddedParentTodo.isComplete).toBe(true);
     expect(addedChildTodo.isComplete).toBe(true);
+    todoStore.markComplete(parentTodo.id);
+    expect(adddedParentTodo.isComplete).toBe(true);
 
 
 });
@@ -71,12 +68,14 @@ it('DeleteTodo', () => {
 
     let adddedParentTodo = todoStore.getTodo(parentTodo.id);
 
+
+    expect(adddedParentTodo.children.length).toBe(0);
+
     todoStore.deleteTodo(parentTodo.Id);
 
     let todos = todoStore.getTodos();
 
-    expect(adddedParentTodo.children.length).toBe(0);
-    expect(todos.length).toBe(0);
+    expect(todos.length).toBe(2);
 
 });
 

@@ -1,9 +1,8 @@
-import moment from 'moment';
 import { computed, observable, decorate } from 'mobx';
 import TodoModel from './TodoModel';
 
 class ParentTodoModel extends TodoModel {
-    constructor(todo){
+    constructor(todo) {
         super();
         this.id = todo.id;
         this.task = todo.task;
@@ -12,22 +11,24 @@ class ParentTodoModel extends TodoModel {
         this.complete = todo.complete;
         this.children = todo.children === undefined ? [] : todo.children;
     }
-   children =  []
-   get isComplete() {
+    children = []
+    get isComplete() {
 
-        let childrenComplete = false;
-
-        this.children.forEach(child => {
-            if(child.isComplete) {
-                childrenComplete = true;
-            }
-        });
-
-       return this.complete || childrenComplete;
-   }
+        let childComplete = true;
+        if (this.children.length > 0) {
+            this.children.forEach(child => {
+                if (!child.isComplete) {
+                    childComplete = false;
+                }
+            });
+        } else {
+            childComplete = false;
+        }
+        return this.complete || childComplete;
+    }
 }
 
 export default decorate(ParentTodoModel, {
-    children :observable,
-    isComplete : computed
+    children: observable,
+    isComplete: computed
 })

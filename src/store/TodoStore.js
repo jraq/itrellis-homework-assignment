@@ -5,7 +5,7 @@ import AddTodoModel from '../model/AddTodoModel'
 import moment from 'moment';
 
 export class TodoStore {
-    constructor(){
+    constructor() {
 
         //Create some dummy data
         let todo = new AddTodoModel();
@@ -33,35 +33,52 @@ export class TodoStore {
     }
 
     addTodo = (todo, parentId = null) => {
-        if(parentId === null){
+        let todoId = "";
+
+        if (parentId === null) {
             let addedTodo = new ParentTodoModel(todo);
+            todoId = addedTodo.id;
             this.todos.push(addedTodo);
+
         } else {
             let parentTodo = this.todos.find(x => x.id === parentId);
             let childTodo = new ChildTodoModel(todo);
+            todoId = childTodo.id;
+
             parentTodo.children.push(childTodo);
         }
+
+        return todoId
     }
 
     markComplete = (todoId, parentId = null) => {
-        if(parentId === null){
+        if (parentId === null) {
             let todo = this.todos.find(x => x.id === todoId);
-            todo.complete = !todo.complete;
+            let completeChange = !todo.complete;
+            todo.complete = completeChange;
+
+            todo.children.forEach(child => {
+                child.complete = completeChange;
+            });
+
+
         } else {
             let parentTodo = this.todos.find(x => x.id === parentId);
-            let childTodo = parentTodo.children.find(x=>x.id === todoId);     
+            let childTodo = parentTodo.children.find(x => x.id === todoId);
             childTodo.complete = !childTodo.complete;
+
+
         }
     }
 
     deleteTodo = (todoId, parentId = null) => {
-        if(parentId === null){
+        if (parentId === null) {
             let todoIndex = this.todos.findIndex(x => x.id === todoId);
             this.todos.splice(todoIndex, 1);
         } else {
             let parentTodo = this.todos.find(x => x.id === parentId);
-            let childIndex = parentTodo.children.findIndex(x=>x.id === todoId);
-            parentTodo.children.splice(childIndex,1);
+            let childIndex = parentTodo.children.findIndex(x => x.id === todoId);
+            parentTodo.children.splice(childIndex, 1);
         }
 
     }

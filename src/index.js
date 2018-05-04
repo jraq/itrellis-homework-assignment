@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import TodoStore from './store/TodoStore';
 import { Provider } from 'mobx-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 
 ReactDOM.render(<BrowserRouter>

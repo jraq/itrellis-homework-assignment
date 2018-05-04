@@ -1,5 +1,4 @@
-import moment from 'moment';
-import { computed, observable, decorate } from 'mobx';
+import { computed, decorate } from 'mobx';
 import TodoModel from './TodoModel';
 
 class ChildTodoModel extends TodoModel {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
+import { Row, Col, ListGroup, ListGroupItem,  } from 'reactstrap';
 import { observer, inject } from 'mobx-react';
 import TodoListItem from './TodoListItem';
+import {Link} from 'react-router-dom';
 class TodoListView extends Component {
     constructor(props) {
         super(props);
@@ -22,18 +23,22 @@ class TodoListView extends Component {
         
         todoStore.markComplete(itemId, parentId);
     }
+
     render() {
         const{ todoStore} = this.props;
         return (
             <Row>
                 <Col>
-                    <h2>Todos</h2>
+                    <h2>To-dos</h2>
                     <Row>
                         <Col>
                             <ListGroup>
                                 {todoStore.todos.map((item, index) =>{
-                                    return <TodoListItem key={index} todo={item} deleteTodo={this.deleteTodo} markComplete={this.markComplete} />;
+                                    return <TodoListItem key={index} isParentTodo={true}  todo={item} deleteTodo={this.deleteTodo} markComplete={this.markComplete} />;
                                 })}
+                                {todoStore.todos.length === 0 && <ListGroupItem>
+                                    <Link to="/add">Add a to-do</Link>
+                                </ListGroupItem>}
                             </ListGroup>
                         </Col>
                     </Row>

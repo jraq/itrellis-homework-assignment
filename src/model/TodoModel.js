@@ -2,10 +2,6 @@ import moment from 'moment';
 import { computed, observable, decorate } from 'mobx';
 
 class TodoModel {
-    constructor(){
-    
-    }
-    
     id = 0
     task = ""
     details = ""

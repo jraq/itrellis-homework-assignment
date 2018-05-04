@@ -1,5 +1,4 @@
-import moment from 'moment';
-import { computed, observable, decorate } from 'mobx';
+import {  decorate } from 'mobx';
 import TodoModel from './TodoModel';
 import shortid from 'shortid';
 
