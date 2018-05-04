@@ -28,4 +28,4 @@ npm test
 ```
 # Interface: Web UI (SPA) 
 
-create-react-app was used to generate the application. React, React-router, React-strap are used for the interface. The application has three pages and four components. React router handles the routing for the pages. The pages are a list view, details view, and add to-do page. The list view item is the final component, which displays a to-do in the list component.  
+create-react-app was used to generate the application. React, React-router, React-strap are used for the interface. The application has three pages and four components. The pages are a list view, details view, and add to-do page. The list view item is the final component, which displays a to-do in the list component. React router handles the routing for the nav bar and links in the application.
